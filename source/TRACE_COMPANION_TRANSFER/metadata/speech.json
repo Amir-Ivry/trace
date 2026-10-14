@@ -1,0 +1,98 @@
+{
+  "asset_path": "assets/speech/dev-real/anonymous0_24.wav",
+  "dataset": "Timers and Such",
+  "version": "1.0",
+  "dataset_relative_path": "dev-real/anonymous0_24.wav",
+  "source_record_url": "https://zenodo.org/records/4623772",
+  "archive_url": "https://zenodo.org/records/4623772/files/timers-and-such-v1.0.zip?download=1",
+  "attribution": "Loren Lugosch; Timers and Such v1.0",
+  "license": "CC0 1.0 Universal",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "sha256": "c303786d4f544d6afa845bceeecadede2f60b717308d5a60afd51650f272d3df",
+  "archive_member": "dev-real/anonymous0_24.wav",
+  "archive_member_crc32_decimal": 480228711,
+  "archive_member_file_bytes": 58022,
+  "sample_rate_hz": 16000,
+  "channels": 1,
+  "frames": 28989,
+  "duration_seconds": 1.8118125,
+  "file_status": "Exact untouched archive-member bytes retrieved; SHA-256 and CRC match prior verified historical source records.",
+  "evaluator_metadata_only": {
+    "dataset_transcription": "start the timer for 9 minutes",
+    "human_readable_transcription": "Start the timer for nine minutes.",
+    "intended_timer_seconds": 540,
+    "semantics": "{'intent': 'SetTimer', 'slots': {'hours': 0, 'minutes': 9, 'seconds': 0}}",
+    "speaker_or_session_id": "anonymous0",
+    "do_not_pass_to_agent": true
+  },
+  "nine_boundary": {
+    "start_seconds": 0.9663125,
+    "end_seconds": 1.167625,
+    "start_sample_in_original": 15461,
+    "end_sample_in_original": 18682,
+    "convention": "zero-based, start inclusive, end exclusive",
+    "method": "Historical released torchaudio MMS_FA forced alignment on original decoded speech using its supplied transcript. No new alignment or listening performed during transfer.",
+    "alignment_score": 0.8708036065101623,
+    "verification_status": "Historical source hash and coordinate provenance verified; not a human-verified phonetic boundary.",
+    "warning": "Silencing only this estimated interval may leave coarticulatory/residual cues. Do not label it proven unrecoverable without reviewing the new derivative.",
+    "padded_v3_samples": [
+      31461,
+      34682
+    ],
+    "padded_v3_offset_samples": 16000,
+    "original_coordinate_mapping": "Original MMS_FA word coordinates are stored before one-second padding. v3 numeral_samples include +16000 samples; remove that offset for the untouched original."
+  },
+  "original_alignment_words": [
+    {
+      "word": "start",
+      "start_sample": 2255,
+      "end_sample": 5798,
+      "alignment_score": 0.9983583688735962
+    },
+    {
+      "word": "the",
+      "start_sample": 6442,
+      "end_sample": 7408,
+      "alignment_score": 0.9851673046747843
+    },
+    {
+      "word": "timer",
+      "start_sample": 8053,
+      "end_sample": 12240,
+      "alignment_score": 0.9004029154777526
+    },
+    {
+      "word": "for",
+      "start_sample": 12884,
+      "end_sample": 14495,
+      "alignment_score": 0.9838752945264181
+    },
+    {
+      "word": "nine",
+      "start_sample": 15461,
+      "end_sample": 18682,
+      "alignment_score": 0.8708036065101623
+    },
+    {
+      "word": "minutes",
+      "start_sample": 19326,
+      "end_sample": 23835,
+      "alignment_score": 0.8077806401997805
+    }
+  ],
+  "historical_alignment_runtime": {
+    "checkpoint_bytes": 1262047414,
+    "checkpoint_sha256": "20ef12963ab4924bef49ac4fc7f58ad5da2ee43b2c11bc8c853c9b90ecdbc680",
+    "checkpoint_url": "https://dl.fbaipublicfiles.com/mms/torchaudio/ctc_alignment_mling_uroman/model.pt",
+    "device": "cpu",
+    "documentation": "https://docs.pytorch.org/audio/2.6.0/tutorials/forced_alignment_for_multilingual_data_tutorial.html",
+    "python": "3.10.20",
+    "scipy": "1.15.2",
+    "torch": "2.6.0+cu124",
+    "torchaudio": "2.6.0+cu124",
+    "verification": "Official TLS URL; successful complete curl transfer and strict released model state loading. SHA256 recorded; no published checksum was supplied."
+  },
+  "historical_provenance": "v3 manifests/recordings.json and scripts/prepare.py; original source hash independently repeated in original experiment audit/selected_speech_members.json",
+  "measured_format": "WAV PCM signed 16-bit mono 16000 Hz",
+  "current_transfer_verification": "metadata/speech_retrieval.json and metadata/audio_verification.json"
+}

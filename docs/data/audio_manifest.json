@@ -1,0 +1,80 @@
+{
+  "purpose": "New companion audio; no associated new model responses",
+  "source_speech_sha256": "c303786d4f544d6afa845bceeecadede2f60b717308d5a60afd51650f272d3df",
+  "source_noise_sha256": "6714b1bc2d4d3ca4e340387c9295ee2ef75296106451d5a1b14999e3236a9abc",
+  "estimated_word_samples_half_open": [
+    15461,
+    18682
+  ],
+  "boundary_source": "Historical automatic forced alignment",
+  "human_phonetic_verification": false,
+  "residual_cues_audited": false,
+  "common_gain": 0.9080760073292201,
+  "common_gain_db": -0.8375559771080144,
+  "quantization": "Shared-gain float32 arrays, rounded once to PCM16; no dithering or separate normalization",
+  "requested_local_snr_db": -10.0,
+  "effective_local_snr_after_pcm16_db": -9.999996578064552,
+  "mixture_audit_before_quantization": {
+    "word_samples_half_open": [
+      15461,
+      18682
+    ],
+    "event_samples_half_open": [
+      14934,
+      26934
+    ],
+    "energy_median_sample": 2138,
+    "noise_gain_before_common_attenuation": 0.8071123257272295,
+    "requested_local_snr_db": -10.0,
+    "measured_local_snr_db": -10.0,
+    "numeral_fraction_of_event_energy": 0.8320506423728523,
+    "unscaled_mixture_peak": 1.089115880188035,
+    "boundary_convention": "zero-based, start inclusive, end exclusive"
+  },
+  "spillover_note": "Full machinery event also overlaps minutes; this is not numeral-only noise",
+  "files": {
+    "reference": {
+      "path": "audio/reference.wav",
+      "sha256": "f12141a1dfefa3d3a90066b85d5f0dcb4bc60e07f1238efaa7c5fbe9017dbcad",
+      "frames": 28989,
+      "sample_rate_hz": 16000,
+      "channels": 1,
+      "encoding": "PCM_16",
+      "duration_seconds": 1.8118125
+    },
+    "machinery": {
+      "path": "audio/machinery.wav",
+      "sha256": "e11df5ec40467079404ec9dd583803371ef69be2559f2de84a1a50d81625509f",
+      "frames": 28989,
+      "sample_rate_hz": 16000,
+      "channels": 1,
+      "encoding": "PCM_16",
+      "duration_seconds": 1.8118125
+    },
+    "segment_silenced": {
+      "path": "audio/segment_silenced.wav",
+      "sha256": "05785e5e0d8401fdbda697dfd9838251b4369a0d1c4e1774b38f9235a3443bf5",
+      "frames": 28989,
+      "sample_rate_hz": 16000,
+      "channels": 1,
+      "encoding": "PCM_16",
+      "duration_seconds": 1.8118125
+    }
+  },
+  "verification": {
+    "all_same_shape": true,
+    "silenced_region_zero": true,
+    "outside_silence_matches_reference": true,
+    "outside_event_matches_reference": true,
+    "clipping_avoided": true,
+    "model_calls": 0,
+    "gpu_allocations": 0,
+    "browser_playback_checked": false,
+    "human_listening_performed": false
+  },
+  "runtime": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0"
+  }
+}

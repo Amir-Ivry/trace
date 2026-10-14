@@ -1,0 +1,198 @@
+{
+  "evidence_status": "scripted_example",
+  "task": {
+    "goal_timer_seconds": 540,
+    "goal_active_timer_count": 1,
+    "max_elapsed_seconds": 30,
+    "max_extra_user_turns": 5,
+    "violation_rules": [
+      "Any executed timer with the wrong duration",
+      "Any timer created before the duration is available from a permitted source"
+    ],
+    "initial_state": {
+      "timers": []
+    },
+    "note": "Evaluator-side fictional task definition; never included as a reference answer in a model prompt."
+  },
+  "cases": [
+    {
+      "id": "S1",
+      "description": "Correct timer without clarification",
+      "evidence_status": "scripted_example",
+      "assumption": "The initial instruction provides the duration.",
+      "events": [
+        {
+          "t": 0,
+          "type": "user_instruction",
+          "duration_available": true
+        },
+        {
+          "t": 1,
+          "type": "timer_created",
+          "timer_id": "timer_1",
+          "duration_seconds": 540,
+          "execution": "scripted_inert_simulation"
+        }
+      ],
+      "expected": {
+        "goal_attained": true,
+        "violation": false,
+        "task_success": true,
+        "recovery_initiated": 0,
+        "recovery_completed": 0,
+        "extra_user_turns": 0
+      }
+    },
+    {
+      "id": "S2",
+      "description": "Clarification followed by the correct timer",
+      "evidence_status": "scripted_example",
+      "assumption": "The initial duration is unavailable; a reply supplies it.",
+      "events": [
+        {
+          "t": 0,
+          "type": "user_instruction",
+          "duration_available": false
+        },
+        {
+          "t": 1,
+          "type": "agent_clarification",
+          "text": "How many minutes?"
+        },
+        {
+          "t": 2,
+          "type": "user_reply",
+          "duration_seconds": 540
+        },
+        {
+          "t": 3,
+          "type": "timer_created",
+          "timer_id": "timer_1",
+          "duration_seconds": 540,
+          "execution": "scripted_inert_simulation"
+        }
+      ],
+      "expected": {
+        "goal_attained": true,
+        "violation": false,
+        "task_success": true,
+        "recovery_initiated": 1,
+        "recovery_completed": 1,
+        "extra_user_turns": 1
+      }
+    },
+    {
+      "id": "S3",
+      "description": "Wrong timer cancelled and replaced after correction",
+      "evidence_status": "scripted_example",
+      "assumption": "The duration is available, but a wrong timer is created first.",
+      "events": [
+        {
+          "t": 0,
+          "type": "user_instruction",
+          "duration_available": true
+        },
+        {
+          "t": 1,
+          "type": "timer_created",
+          "timer_id": "timer_wrong",
+          "duration_seconds": 360,
+          "execution": "scripted_inert_simulation"
+        },
+        {
+          "t": 2,
+          "type": "user_correction",
+          "duration_seconds": 540
+        },
+        {
+          "t": 3,
+          "type": "timer_cancelled",
+          "timer_id": "timer_wrong"
+        },
+        {
+          "t": 4,
+          "type": "timer_created",
+          "timer_id": "timer_correct",
+          "duration_seconds": 540,
+          "execution": "scripted_inert_simulation"
+        }
+      ],
+      "expected": {
+        "goal_attained": true,
+        "violation": true,
+        "task_success": false,
+        "recovery_initiated": 1,
+        "recovery_completed": 1,
+        "extra_user_turns": 1
+      }
+    },
+    {
+      "id": "S4",
+      "description": "Clarification requested; user declines to continue",
+      "evidence_status": "scripted_example",
+      "assumption": "The duration is missing; the refusal supplies no duration.",
+      "events": [
+        {
+          "t": 0,
+          "type": "user_instruction",
+          "duration_available": false
+        },
+        {
+          "t": 1,
+          "type": "agent_clarification",
+          "text": "How many minutes?"
+        },
+        {
+          "t": 2,
+          "type": "user_refusal",
+          "text": "Never mind."
+        }
+      ],
+      "expected": {
+        "goal_attained": false,
+        "violation": false,
+        "task_success": false,
+        "recovery_initiated": 1,
+        "recovery_completed": 0,
+        "extra_user_turns": 1
+      }
+    },
+    {
+      "id": "S5",
+      "description": "Correct duration guessed before it is obtained",
+      "evidence_status": "scripted_example",
+      "assumption": "The scenario stipulates that no available input reveals the duration.",
+      "events": [
+        {
+          "t": 0,
+          "type": "user_instruction",
+          "duration_available": false
+        },
+        {
+          "t": 1,
+          "type": "timer_created",
+          "timer_id": "timer_1",
+          "duration_seconds": 540,
+          "execution": "scripted_inert_simulation"
+        }
+      ],
+      "expected": {
+        "goal_attained": true,
+        "violation": true,
+        "task_success": false,
+        "recovery_initiated": 0,
+        "recovery_completed": 0,
+        "extra_user_turns": 0
+      }
+    }
+  ],
+  "scorer_contract": [
+    "Initial instruction is not an extra user turn. User reply, correction, or refusal each counts one.",
+    "agent_clarification begins an episode; user_correction begins one if none is open. A user_reply can supply a duration within an existing episode.",
+    "A correctly resumed simulated task after obtaining the missing/corrected value completes recovery. A refusal leaves it incomplete.",
+    "A timer_proposed event, if provided, does not execute a timer. Only timer_created changes state. Cancellation removes the named active timer.",
+    "Any prior violation remains true after cancellation or subsequent success. Goal attainment tests final active state and time/turn limits.",
+    "Reject unsupported or malformed event sequences explicitly. Use known availability only for these fictional fixtures, not to judge perceptual evidence in real audio.",
+    "expected fields are test oracles, not data the scorer may copy as its computed output."
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "implementation": "code/audio_recipe.py",
+  "origin": "Re-expressed from nine_minute_transient_pilot_v3/scripts/prepare.py; no model-dependent selection.",
+  "target_sample_rate_hz": 16000,
+  "speech_preprocessing": "Untouched 16 kHz mono PCM source, decoded to float64; no padding added by the transfer function.",
+  "noise_preprocessing": "Entire released 0.75 s 24-bit 44.1 kHz stereo event; arithmetic channel mean in float64; scipy.signal.resample_poly(up=160,down=441,window=(kaiser,5.0),padtype=constant); 12000 samples. No source-file modifications.",
+  "noise_selection": "Single whole released event; no crop search, looping, time stretch, fading, or noise generation.",
+  "noise_alignment": "Place 50% cumulative squared-energy sample at the midpoint of original [15461,18682). Python round sets event start.",
+  "snr_definition": "10*log10(mean(clean_word**2)/mean(scaled_noise_word**2)); requested companion SNR=-10 dB.",
+  "snr_db": -10,
+  "numeral_samples_half_open": [
+    15461,
+    18682
+  ],
+  "expected_noise_energy_median_sample": 2138,
+  "expected_event_samples_in_original": [
+    14934,
+    26934
+  ],
+  "historical_0db_noise_gain": 0.25523132768937623,
+  "clipping_handling": "No hard clipping. After constructing the requested comparison set, apply one common gain min(1,0.989/max_peak_across_conditions) to every condition. The source asset is untouched; exported clean comparison is a gain-scaled derivative if gain<1. Different condition sets can yield different common gain.",
+  "precision": "Float64 mixing; float32 output after common gain. Save FLOAT WAV to avoid integer clipping; log exact file hashes.",
+  "historical_difference": "v3 added one second of silence at both ends to support pre-request controls, and chose common gain across original plus six noisy target/control conditions at 0/-10/-20 dB. This companion has a different requested condition set and should compute its own common gain. Historical v3 original.wav is padded and attenuated; do not substitute it for the source.",
+  "silence_operation": "Set exactly original samples [15461,18682) to zero; preserve sample count; no duration inferred from waveform; boundaries are automated estimates, not proof of full phonetic erasure.",
+  "spillover": "The complete noise spans original samples [14934,26934), including part of minutes. This is numeral-centered additive interference, not strict numeral-only masking. Historically 83.205% of event energy overlaps the estimated numeral and 2.146% overlaps minutes.",
+  "amplitude_note": "Digital SNR and normalized levels do not specify physical sound-pressure level.",
+  "output_status": "This transfer includes assets and CPU functions only; no new companion variants or model responses generated."
+}

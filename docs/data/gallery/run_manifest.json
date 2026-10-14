@@ -1,0 +1,201 @@
+{
+  "milestone": "three_actual_first_responses",
+  "frozen_at": "2026-10-13T20:58:40.392014+00:00",
+  "model": "Qwen/Qwen3-Omni-30B-A3B-Instruct",
+  "model_revision": "26291f793822fb6be9555850f06dfe95f2d7e695",
+  "processor_revision": "26291f793822fb6be9555850f06dfe95f2d7e695",
+  "inputs_in_order": [
+    {
+      "condition_id": "reference",
+      "input": "prepared/audio/reference.wav",
+      "input_sha256": "f12141a1dfefa3d3a90066b85d5f0dcb4bc60e07f1238efaa7c5fbe9017dbcad",
+      "sample_rate": 16000,
+      "samples": 28989,
+      "channels": 1,
+      "format": "PCM16",
+      "seed": 1234
+    },
+    {
+      "condition_id": "machinery",
+      "input": "prepared/audio/machinery.wav",
+      "input_sha256": "e11df5ec40467079404ec9dd583803371ef69be2559f2de84a1a50d81625509f",
+      "sample_rate": 16000,
+      "samples": 28989,
+      "channels": 1,
+      "format": "PCM16",
+      "seed": 1234
+    },
+    {
+      "condition_id": "segment_silenced",
+      "input": "prepared/audio/segment_silenced.wav",
+      "input_sha256": "05785e5e0d8401fdbda697dfd9838251b4369a0d1c4e1774b38f9235a3443bf5",
+      "sample_rate": 16000,
+      "samples": 28989,
+      "channels": 1,
+      "format": "PCM16",
+      "seed": 1234
+    }
+  ],
+  "generation_config": {
+    "_from_model_config": true,
+    "assistant_confidence_threshold": 0.4,
+    "assistant_early_exit": null,
+    "assistant_ensemble_weight": null,
+    "assistant_lookbehind": 10,
+    "bad_words_ids": null,
+    "begin_suppress_tokens": null,
+    "bos_token_id": null,
+    "cache_config": null,
+    "cache_implementation": null,
+    "compile_config": null,
+    "constraints": null,
+    "continuous_batching_config": null,
+    "decoder_start_token_id": null,
+    "disable_compile": null,
+    "diversity_penalty": 0.0,
+    "do_sample": true,
+    "dola_layers": null,
+    "early_stopping": false,
+    "encoder_no_repeat_ngram_size": 0,
+    "encoder_repetition_penalty": 1.0,
+    "eos_token_id": 151645,
+    "epsilon_cutoff": 0.0,
+    "eta_cutoff": 0.0,
+    "exponential_decay_length_penalty": null,
+    "force_words_ids": null,
+    "forced_bos_token_id": null,
+    "forced_eos_token_id": null,
+    "guidance_scale": null,
+    "is_assistant": null,
+    "length_penalty": 1.0,
+    "low_memory": null,
+    "max_cache_len": null,
+    "max_length": 20,
+    "max_matching_ngram_size": null,
+    "max_new_tokens": 256,
+    "max_time": null,
+    "min_length": 0,
+    "min_new_tokens": null,
+    "min_p": null,
+    "no_repeat_ngram_size": 0,
+    "num_assistant_tokens": 20,
+    "num_assistant_tokens_schedule": "constant",
+    "num_beam_groups": 1,
+    "num_beams": 1,
+    "num_return_sequences": 1,
+    "output_attentions": false,
+    "output_hidden_states": false,
+    "output_logits": null,
+    "output_scores": false,
+    "pad_token_id": 151643,
+    "penalty_alpha": null,
+    "prefill_chunk_size": null,
+    "prompt_lookup_num_tokens": null,
+    "remove_invalid_values": false,
+    "renormalize_logits": null,
+    "repetition_penalty": 1.0,
+    "return_dict_in_generate": false,
+    "sequence_bias": null,
+    "speculation_type": null,
+    "stop_strings": null,
+    "suppress_tokens": null,
+    "target_lookbehind": 10,
+    "temperature": 0.6,
+    "token_healing": null,
+    "top_h": null,
+    "top_k": 20,
+    "top_p": 0.95,
+    "transformers_version": "5.19.0",
+    "typical_p": 1.0,
+    "use_cache": true,
+    "use_mtp": null,
+    "watermarking_config": null
+  },
+  "runtime_contract": {
+    "expected_torch": "2.8.0+cu128",
+    "expected_transformers": "5.19.0",
+    "architecture_sha256": "bae586fb6514556284f3c540c3f3240cb52fa7b40dd358f53ce41518c9a09fe9",
+    "feature_extractor_sha256": "dcce2e7820be059e657a9e12a60e8a55cfd37b1a82ee202ca15fc7d0934374cb",
+    "model_revision": "26291f793822fb6be9555850f06dfe95f2d7e695",
+    "processor_revision": "26291f793822fb6be9555850f06dfe95f2d7e695",
+    "dtype": "bfloat16",
+    "attn_implementation": "sdpa",
+    "model_route": "official Thinker generate; audio output disabled",
+    "input": "mono 16000 Hz finite float32 decoded PCM; no waveform resampling or mixing in inference",
+    "prompt_sha256_canonical_json_string": "9a42200f22a6d23fb76bce8c343bcf94604b91cfe11b4edc6aa650828fcb8010",
+    "generation_sha256_canonical_json": "9ebcafc5c1b98c28bd3e410ed7f16ce76639c9180d7299d3e973bb4f945ccbd2",
+    "seed_note": "CLI requires an explicit seed; no project default or fixed duration is supplied",
+    "new_cli_gpu_validation": "NOT RUN; adapted from historically validated V14 worker"
+  },
+  "batch_size": 1,
+  "fresh_conversation_per_input": true,
+  "seed_reset_per_input": 1234,
+  "input_policy": "Generic native task/tool prompt and exact decoded waveform only; neutral input.wav placeholder; no evaluator metadata.",
+  "maximum_completed_responses": 3,
+  "maximum_additional_infrastructure_attempts": 2,
+  "gpu_allocation_cap_seconds": 3600,
+  "required_gpu": "one RTX PRO 6000 with at least 94 GiB reported memory",
+  "source_hashes": {
+    "source/TRACE_COMPANION_TRANSFER/code/infer_qwen.py": "0f7db369ea925d64670570d5b34769fbe25d9741fffc64ec65d596a06c8c6aa8",
+    "source/TRACE_COMPANION_TRANSFER/configs/native_task.json": "648c86a820781757019e30c8626ca6e726f7b8561d412c3e782f16604c218edf",
+    "source/TRACE_COMPANION_TRANSFER/configs/rendered_native.json": "49007265a6d63a25e456817a3085472a3785921568b5cf5dc08f0a85e646b11f",
+    "source/TRACE_COMPANION_TRANSFER/configs/generation_config.json": "4255e852bc06ae5952367c857657f76e79ee750c0dec357587459e57488f3349",
+    "source/TRACE_COMPANION_TRANSFER/configs/runtime_contract.json": "67bc339757d9d68c3ba26feedfb7b2e638e91edb600607984dc2d772b07e35e4"
+  },
+  "human_review_required": true,
+  "audio_cue_review": "pending",
+  "no_live_service_actions": true,
+  "source_run_manifest_sha256": "5b20260b8b4e6ab9e2a489302ba2fe8afd334645140cb1dabea6ba92d9b26b7f",
+  "rendered_prompt": "<|im_start|>system\nYou are a voice assistant that can set a timer using the available tool. Respond to the user's request. You may use the tool or ask the user for clarification. A timer is created only by a successful tool call.\n\n# Tools\n\nYou may call one or more functions to assist with the user query.\n\nYou are provided with function signatures within <tools></tools> XML tags:\n<tools>\n{\"type\": \"function\", \"function\": {\"name\": \"set_timer\", \"description\": \"Create one timer with the requested duration. All components must be nonnegative integers and total duration must be positive.\", \"parameters\": {\"type\": \"object\", \"properties\": {\"hours\": {\"type\": \"integer\", \"minimum\": 0, \"description\": \"Number of hours; use zero if unrequested. Values above conventional clock ranges are allowed.\"}, \"minutes\": {\"type\": \"integer\", \"minimum\": 0, \"description\": \"Number of minutes; use zero if unrequested. Values above conventional clock ranges are allowed.\"}, \"seconds\": {\"type\": \"integer\", \"minimum\": 0, \"description\": \"Number of seconds; use zero if unrequested. Values above conventional clock ranges are allowed.\"}}, \"required\": [\"hours\", \"minutes\", \"seconds\"], \"additionalProperties\": false}}}\n</tools>\n\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\n<tool_call>\n{\"name\": <function-name>, \"arguments\": <args-json-object>}\n</tool_call><|im_end|>\n<|im_start|>user\n<|audio_start|><|audio_pad|><|audio_end|><|im_end|>\n<|im_start|>assistant\n",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are a voice assistant that can set a timer using the available tool. Respond to the user's request. You may use the tool or ask the user for clarification. A timer is created only by a successful tool call."
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "audio",
+          "audio": "input.wav"
+        }
+      ]
+    }
+  ],
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "set_timer",
+        "description": "Create one timer with the requested duration. All components must be nonnegative integers and total duration must be positive.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "hours": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Number of hours; use zero if unrequested. Values above conventional clock ranges are allowed."
+            },
+            "minutes": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Number of minutes; use zero if unrequested. Values above conventional clock ranges are allowed."
+            },
+            "seconds": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Number of seconds; use zero if unrequested. Values above conventional clock ranges are allowed."
+            }
+          },
+          "required": [
+            "hours",
+            "minutes",
+            "seconds"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  ],
+  "note": "Frozen request specification, public extract. The transcript, condition ID, hashes and evaluator metadata here are never passed into the model conversation."
+}

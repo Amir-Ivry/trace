@@ -1,0 +1,62 @@
+{
+  "completed_generations": 3,
+  "generation_attempts": 3,
+  "infrastructure_retries": 0,
+  "gpu_allocations": 1,
+  "gpu_allocation_seconds": 141,
+  "job_wrapper_seconds": 140.14141012099572,
+  "generation_seconds_total": 4.20405401987955,
+  "gpu_released": true,
+  "human_review_required": true,
+  "audio_review_status": "pending",
+  "observations": [
+    {
+      "condition_id": "reference",
+      "attempt_count": 1,
+      "raw_response": "<tool_call>\n{\"name\": \"set_timer\", \"arguments\": {\"hours\": 0, \"minutes\": 9, \"seconds\": 0}}\n</tool_call><|im_end|>",
+      "proposed_action": {
+        "name": "set_timer",
+        "duration_seconds": 540,
+        "arguments": {
+          "hours": 0,
+          "minutes": 9,
+          "seconds": 0
+        },
+        "status": "proposal_only"
+      },
+      "generated_tokens": 32,
+      "generation_seconds": 2.3098133949097246,
+      "created_at": "2026-10-13T21:34:00.273301+00:00",
+      "raw_loader_sha256": "ffc3458f2b62a206ad1067e011ff5b655fd4dc719b2337d91b4c8aac2d15cbf5"
+    },
+    {
+      "condition_id": "machinery",
+      "attempt_count": 1,
+      "raw_response": "<tool_call>\n{\"name\": \"set_timer\", \"arguments\": {\"hours\": 0, \"minutes\": 9, \"seconds\": 0}}\n</tool_call><|im_end|>",
+      "proposed_action": {
+        "name": "set_timer",
+        "duration_seconds": 540,
+        "arguments": {
+          "hours": 0,
+          "minutes": 9,
+          "seconds": 0
+        },
+        "status": "proposal_only"
+      },
+      "generated_tokens": 32,
+      "generation_seconds": 1.1589598979335278,
+      "created_at": "2026-10-13T21:34:26.303050+00:00",
+      "raw_loader_sha256": "18579f8ad6e3e8bc6277b91a791f13d26c747e8782b8c77de3deae455b4adea8"
+    },
+    {
+      "condition_id": "segment_silenced",
+      "attempt_count": 1,
+      "raw_response": "How many minutes would you like to set the timer for?<|im_end|>",
+      "proposed_action": null,
+      "generated_tokens": 13,
+      "generation_seconds": 0.7352807270362973,
+      "created_at": "2026-10-13T21:34:50.984635+00:00",
+      "raw_loader_sha256": "7395fabf5154aada9d664279311410d051631c0a9f2f95909057a8b97e895e22"
+    }
+  ]
+}

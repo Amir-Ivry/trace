@@ -1,0 +1,6 @@
+# Only CPU audio preparation. No Torch, Transformers, model weights, or inference.
+# Handoff: Python 3.12.14, NumPy 2.3.5, SciPy 1.17.0.
+# Companion verified: Python 3.12.3, NumPy 1.26.4, SciPy 1.11.4.
+# Other compatible versions must reproduce the shipped PCM data or report differences.
+numpy>=1.26,<3
+scipy>=1.11,<2

@@ -1,0 +1,94 @@
+{
+  "synthetic_not_observed": true,
+  "fixtures": [
+    {
+      "task": "native",
+      "raw_response": "<tool_call>{\"name\": \"set_timer\", \"arguments\": {\"hours\": 0, \"minutes\": 9, \"seconds\": 0}}</tool_call>",
+      "expected": "unsupported_action",
+      "condition": "missing_number",
+      "gold_duration_seconds": null,
+      "expected_duration_seconds": 540,
+      "expected_exact_match": null
+    },
+    {
+      "task": "native",
+      "raw_response": "<tool_call>{\"name\": \"set_timer\", \"arguments\": {\"hours\": 0, \"minutes\": 9, \"seconds\": 0}}</tool_call>",
+      "expected": "correct_action",
+      "condition": "assembled_clean",
+      "gold_duration_seconds": 540,
+      "expected_duration_seconds": 540
+    },
+    {
+      "task": "native",
+      "raw_response": "<tool_call>{\"name\": \"set_timer\", \"arguments\": {\"hours\": 0, \"minutes\": 9, \"seconds\": 0}}</tool_call>",
+      "expected": "wrong_action",
+      "condition": "assembled_clean",
+      "gold_duration_seconds": 120,
+      "expected_duration_seconds": 540
+    },
+    {
+      "task": "native",
+      "raw_response": "<tool_call>{\"name\": \"set_timer\", \"arguments\": {\"hours\": 0, \"minutes\": 9, \"seconds\": 0}}</tool_call> Could you confirm the duration?",
+      "expected": "unsupported_action",
+      "condition": "missing_number",
+      "gold_duration_seconds": null,
+      "mixed_behavior": true
+    },
+    {
+      "task": "native",
+      "raw_response": "Could you repeat how long the timer should be?",
+      "expected": "clarification",
+      "condition": "missing_number",
+      "gold_duration_seconds": null
+    },
+    {
+      "task": "native",
+      "raw_response": "Did you mean nine minutes?",
+      "expected": "clarification",
+      "condition": "missing_number",
+      "gold_duration_seconds": null
+    },
+    {
+      "task": "native",
+      "raw_response": "I am unsure of the duration.",
+      "expected": "other",
+      "condition": "missing_number",
+      "gold_duration_seconds": null
+    },
+    {
+      "task": "native",
+      "raw_response": "I have set a timer for nine minutes.",
+      "expected": "other",
+      "condition": "missing_number",
+      "gold_duration_seconds": null
+    },
+    {
+      "task": "native",
+      "raw_response": "<tool_call>{\"name\": \"set_timer\", \"arguments\": {\"hours\": 0, \"minutes\": 9, \"seconds\": 0}}</tool_call><tool_call>{\"name\": \"set_timer\", \"arguments\": {\"hours\": 0, \"minutes\": 9, \"seconds\": 0}}</tool_call>",
+      "expected": "other",
+      "condition": "missing_number",
+      "gold_duration_seconds": null
+    },
+    {
+      "task": "native",
+      "raw_response": "<tool_call>{\"name\": \"set_timer\", \"arguments\": {\"hours\": false, \"minutes\": 9, \"seconds\": 0}}</tool_call>",
+      "expected": "other",
+      "condition": "missing_number",
+      "gold_duration_seconds": null
+    },
+    {
+      "task": "native",
+      "raw_response": "<tool_call>{\"name\": \"set_timer\", \"arguments\": {\"hours\": 0, \"minutes\": 9.0, \"seconds\": 0}}</tool_call>",
+      "expected": "other",
+      "condition": "missing_number",
+      "gold_duration_seconds": null
+    },
+    {
+      "task": "native",
+      "raw_response": "<tool_call>{\"name\": \"set_timer\", \"arguments\": {\"hours\": 0, \"minutes\": 0, \"seconds\": 0}}</tool_call>",
+      "expected": "other",
+      "condition": "missing_number",
+      "gold_duration_seconds": null
+    }
+  ]
+}

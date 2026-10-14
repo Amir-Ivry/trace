@@ -1,0 +1,3 @@
+<tool_call>
+{"name": "set_timer", "arguments": {"hours": 0, "minutes": 9, "seconds": 0}}
+</tool_call><|im_end|>

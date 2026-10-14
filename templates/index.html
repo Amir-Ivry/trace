@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A TRACE paper companion: listen to three timer inputs, inspect archived evidence, and reproduce scripted conversation scoring on CPU.">
+  <title>TRACE · Voice Agents Under Acoustic Stress</title>
+  <link rel="canonical" href="@@PAGE_URL@@">
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="assets/app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar"><a class="brand" href="#main">TRACE<small>Paper companion</small></a><nav aria-label="Page navigation"><a href="#audio">Listen</a><a href="#scoring">Scoring</a><a href="#run">Reproduce</a></nav></header>
+<main id="main">
+  <header class="hero">
+    <p class="eyebrow">@@STATUS@@ · 2026</p>
+    <h1>@@TITLE@@</h1>
+    <p class="authors">@@AUTHORS@@</p>
+    <p class="affiliations">@@AFFILIATIONS@@</p>
+    <p class="summary">@@SUMMARY@@</p>
+    <div class="actions"><a class="button primary" href="paper.pdf">Read the paper <span aria-hidden="true">&nbsp;↗</span></a><a class="button" href="@@GITHUB_URL@@">GitHub <span aria-hidden="true">&nbsp;↗</span></a><a class="button" href="#audio">Audio examples <span aria-hidden="true">&nbsp;↓</span></a><a class="button" href="downloads/TRACE_COMPANION_CODE.zip" download>Download code and examples</a></div>
+  </header>
+
+  <section id="workflow" aria-labelledby="workflow-title">
+    <span class="section-number">01 / THE WORKFLOW</span>
+    <h2 id="workflow-title">What TRACE does</h2>
+    <p class="lead">Follow a spoken request from the recording to the action it produces. Define what a successful task requires, compare inputs, then follow the conversation through mistakes, recovery, and user effort.</p>
+    <ol class="workflow">@@STEPS@@</ol>
+  </section>
+
+  <section id="audio" aria-labelledby="audio-title">
+    <span class="section-number">02 / LISTEN TO THE INPUTS</span>
+    <h2 id="audio-title">One timer instruction, three listening conditions</h2>
+    <p class="lead">This timer example shows how TRACE connects a change in speech to the agent’s next action. The three clips contain the same instruction, with added noise or a silenced segment in two copies. The question is whether enough information remains to set the correct timer, or whether the agent needs to ask for the duration.</p>
+    <blockquote class="utterance">“Start the timer for nine minutes.”</blockquote>
+    <div class="gallery">@@CARDS@@</div>
+    <p class="shared-note">All three clips use the same attenuation to avoid clipping. Exact preparation details and the untouched source recording are available below.</p>
+    <div class="callout">@@GALLERY_NOTE@@</div>
+    <details class="technical"><summary>Audio preparation, exact files, and pending input review</summary>
+      <dl><dt>Recording</dt><dd>Timers and Such v1.0, <code>dev-real/anonymous0_24.wav</code>. Mono, 16 kHz, 28,989 samples (1.8118125 seconds) in every comparison file.</dd>
+      <dt>Shared attenuation</dt><dd>All three files use gain 0.908076 (about −0.84 dB), followed by the same PCM16 export. This preserves relative levels without clipping; it does not equalize the clips’ loudness. “Original speech” is a comparison copy of the <a href="audio/untouched_source.wav" download>untouched source recording</a>. These exact PCM16 files are the model inputs specified for this gallery.</dd>
+      <dt>Marked number</dt><dd>Samples [15461, 18682), or 0.9663125–1.167625 seconds. Start inclusive; end exclusive. These are historical automatic forced-alignment estimates, not human phonetic annotations. The silenced condition sets this interval to zero and retains the duration.</dd>
+      <dt>Machinery event</dt><dd>The complete released 0.75-second Holman nc4 event spans samples [14934, 26934), or 0.933375–1.683375 seconds. It overlaps the duration phrase, including part of “minutes.” The creator’s released recording includes mastering and beat-length editing.</dd>
+      <dt>Local SNR</dt><dd>−10 dB, calibrated from speech and added-noise energy only within the marked number interval, before their shared attenuation. After PCM16 export: −9.9999966 dB. This is neither whole-recording SNR nor physical sound pressure. No SNR applies to the silenced condition.</dd>
+      <dt>Input review</dt><dd>Human listening and a residual-cue audit remain pending. No model response determined the segment boundaries or machinery selection. The visible transcript is for visitors; it is not model input.</dd>
+      <dt>Frozen requests</dt><dd>Qwen3-Omni-30B-A3B-Instruct; model and processor revision <code>@@REVISION@@</code>. Each request uses a fresh conversation and seed 1234, Thinker audio input with text output, BF16, SDPA, and batch size one. Sampling: temperature 0.6, top-p 0.95, top-k 20, maximum 256 new tokens. The model receives only the audio waveform and generic timer <a href="data/native_prompt.txt">prompt/tool schema</a>, with the neutral <code>input.wav</code> placeholder. See the complete <a href="data/generation_config.json">generation settings</a> and <a href="data/gallery/run_manifest.json">frozen request manifest</a>. No model is loaded by this page.</dd></dl>
+      <p>Exact SHA-256 values for the PCM16 files:</p><ul>@@HASHES@@</ul>
+      <p><a href="data/audio_manifest.json">Original preparation manifest (before inference)</a> · <a href="data/gallery.json">Saved gallery evidence states</a></p>
+    </details>
+  </section>
+
+  <details id="archive" class="technical">
+    <summary>Optional: one archived model response from 9 October 2026</summary>
+    <p class="lead">An actual response recorded on 9 October 2026, kept separate from the three current responses. It belongs to its own gain-scaled recording and is not used as evidence for any of the three new inputs.</p>
+    <div class="archive">
+      <div class="archive-player"><span class="badge">Historical actual response</span><h3>Exact archived input</h3><p>Original speech with gain 0.9708313164; no added noise. This player uses the original float WAV, with no conversion.</p><audio controls preload="metadata" aria-label="Exact archived gain-scaled input"><source src="audio/pilot_recording.wav" type="audio/wav">Your browser does not support this WAV. <a href="audio/pilot_recording.wav">Download the exact archived input</a>.</audio><p class="small"><a href="audio/pilot_recording.wav" download>Download original float WAV</a></p></div>
+      <div><h3>Complete generated response</h3><pre><code>@@RAW_RESPONSE@@</code></pre><p><strong>Proposed action:</strong> <code>set_timer(hours=0, minutes=9, seconds=0)</code>. Generated syntax alone is a proposal.</p><p><strong>Recorded simulation:</strong> the archived trace separately reports a 540-second timer in memory. No real timer was started.</p></div>
+    </div>
+    <details class="technical"><summary>Archived model, settings, and evidence provenance</summary><dl><dt>Model</dt><dd>Qwen/Qwen3-Omni-30B-A3B-Instruct<br>Revision <code>@@REVISION@@</code></dd><dt>Timestamp / seed</dt><dd>9 October 2026, 16:41:05 UTC · Seed 655677136 · 32 generated tokens.</dd><dt>Sampling</dt><dd>Sampling enabled; temperature 0.6, top-p 0.95, top-k 20, maximum 256 new tokens. The <a href="data/historical_generation_config.json">complete saved settings</a> and <a href="data/historical_prompt.txt">exact rendered prompt</a> are available.</dd><dt>Input SHA-256</dt><dd class="hash"><code>722b0356acb98ce36c91e2d73b4e45873d7a1864ad1904406a0df9634f4637e6</code></dd></dl><p><a href="data/historical_raw_response.txt">Exact raw response</a> · <a href="data/historical.json">Public evidence extract with recorded simulation</a>. This extract retains response, prompt, tokens, settings, and simulation, while excluding old host paths and runtime receipts. Its source-trace hash identifies the unchanged archival record.</p></details>
+  </details>
+
+  <section id="scoring" aria-labelledby="scoring-title">
+    <span class="section-number">03 / FOLLOW THE CONVERSATION</span>
+    <h2 id="scoring-title">How TRACE scores a conversation</h2>
+    <p class="lead">A first response does not show whether the task eventually succeeds. The scripted examples below illustrate how TRACE follows the conversation and records mistakes and extra user effort.</p>
+    <p class="score-label">Scripted scoring examples — not measured model performance</p>
+    <table class="scores"><caption>Goal: exactly one active 540-second timer at the end, within 30 seconds and at most five extra user turns.</caption><thead><tr><th scope="col">Scripted scenario</th><th scope="col">Goal attained</th><th scope="col">Violation</th><th scope="col">Recovery<br>completed / initiated</th><th scope="col">Task success</th><th scope="col">Extra user turns</th></tr></thead><tbody>@@SCORE_ROWS@@</tbody></table>
+    <div class="score-notes"><p><strong>A correct final timer is only part of success.</strong> Creating a wrong-duration timer, or creating a timer before required information is obtained, remains a violation even if it is later cancelled. Task success requires the goal and no violations.</p><p><strong>Recovery takes more than asking.</strong> A request for missing information or user correction begins an attempt. Obtaining the information and using it to resume the task completes recovery. Every user reply, correction, or refusal after the initial instruction adds one user turn.</p></div>
+    <p class="small">The fictional missing-duration cases explicitly stipulate that the number is unavailable until the user supplies it. That assumption does not establish what can be heard in the new silenced WAV. A proposal alone never changes simulated state. These five rows are teaching examples; they do not support an agent success rate or a combined TRACE score.</p>
+    <details class="technical"><summary>Inspect the scripted conversations and computed state</summary>@@SCRIPTED_LOGS@@<p><a href="data/scoring_examples.json">Event fixtures and hand-calculated expectations</a> · <a href="data/scripted_scores.json">Computed scores, violations, and final states</a></p><p>Exceeding a time or turn limit prevents goal attainment and task success. Budget failures are reported separately from prohibited actions. Invalid event sequences are rejected explicitly. Only inert timers in local memory are used.</p></details>
+  </section>
+
+  <section id="run" aria-labelledby="run-title">
+    <span class="section-number">04 / REPRODUCE AND ADAPT</span>
+    <h2 id="run-title">Run the example on CPU</h2>
+    <p class="lead">Download and extract the example package. Use Python 3.10 or newer with NumPy and SciPy; installation instructions are included in the README. The CPU tools need no model credentials or GPU.</p>
+    <div class="run-grid"><div><h3>Two commands, from the extracted folder</h3><pre><code>python -B scripts/prepare_audio.py --output outputs/reproduced_audio
+python -B -m companion.scoring --output outputs/scripted_scores.json</code></pre><p class="small">Preparation reproduces the shipped PCM16 inputs. Scoring computes all five rows from the event logs.</p><a class="button primary" href="downloads/TRACE_COMPANION_CODE.zip" download>Download code and examples</a></div><div><h3>Adapt it to your task</h3><ol><li>Replace the recording and mark the segment to change. Review what information remains after editing.</li><li>For a different task, replace the timer-specific rules and state updates in <code>companion/scoring.py</code>. Changing the example JSON alone does not define a new scorer.</li><li>Represent the conversation as event logs, keeping proposed actions separate from actions that were executed. The supplied scorer accepts scripted examples; using real logs requires an adapter and validation.</li></ol></div></div>
+    <details class="technical"><summary>Saved responses and optional GPU reproduction</summary><p>@@RESPONSE_IMPORT_NOTE@@</p><p>The download includes a separate optional GPU entry point and pinned runtime instructions. The two CPU commands above do not install or load model dependencies. GPU reproduction needs the specified 96 GB RTX PRO 6000 and a separately obtained pinned model snapshot.</p></details>
+  </section>
+
+  <section id="credits" aria-labelledby="credits-title">
+    <span class="section-number">05 / CITATION AND CREDITS</span>
+    <h2 id="credits-title">Reference the paper</h2>
+    <div class="citation-head"><h3>BibTeX · submitted manuscript</h3><button type="button" class="button copy-button" id="copy-citation">Copy citation</button></div>
+    <pre><code id="bibtex">@@BIBTEX@@</code></pre><p id="copy-status" class="copy-status" role="status" aria-live="polite"></p>
+    <div class="credits"><p><strong>Speech:</strong> Loren Lugosch, <a href="https://zenodo.org/records/4623772">Timers and Such v1.0</a>, <code>dev-real/anonymous0_24.wav</code>, CC0 1.0. <a href="licenses/speech_CC0_1.0.txt">License text</a>.</p><p><strong>Machinery:</strong> ldezem / Ore.e Refineries, <a href="https://oree.storijapan.net/praxis/sound-of-work/">Sound of Work: Blacksmith edition 1</a>, Holman nc4 start event, recorded at Jesse Sipola’s smithy. Released under CC0 1.0; the creator’s metadata marks it public domain. <a href="licenses/noise_CC0_1.0.txt">License text</a>.</p><p><strong>Archived model:</strong> Qwen team, <a href="https://huggingface.co/Qwen/Qwen3-Omni-30B-A3B-Instruct">Qwen3-Omni-30B-A3B-Instruct model card</a>. No weights or inference runtime are included.</p><p>Audio licenses apply to the audio assets. The downloaded <a href="data/CREDITS_AND_LICENSES.txt">provenance and licensing note</a> identifies transferred code separately; no blanket code or paper license is asserted. The PDF is the unchanged submitted manuscript.</p></div>
+  </section>
+</main>
+<footer><span>TRACE · A practical workflow for voice-agent evaluation</span><span>@@FOOTER_EVIDENCE@@</span></footer>
+</body>
+</html>

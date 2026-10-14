@@ -1,0 +1,12 @@
+{
+  "condition_id": "reference",
+  "input_sha256": "f12141a1dfefa3d3a90066b85d5f0dcb4bc60e07f1238efaa7c5fbe9017dbcad",
+  "model": "Qwen/Qwen3-Omni-30B-A3B-Instruct",
+  "model_revision": "26291f793822fb6be9555850f06dfe95f2d7e695",
+  "raw_response": null,
+  "prompt": null,
+  "settings": null,
+  "seed": null,
+  "timestamp": null,
+  "note": "Template only, deliberately invalid until populated with an actual matching saved response. No response has been generated."
+}

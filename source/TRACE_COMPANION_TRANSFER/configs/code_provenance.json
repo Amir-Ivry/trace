@@ -1,0 +1,39 @@
+{
+  "source_experiment": "historical qwen_missing_duration_v14",
+  "source_files": {
+    "scripts/worker.py": {
+      "sha256": "c8858496bd23517994145b34bb2e30cc9530f13c58a946227f5c73e2edfa9672",
+      "used_for": "native inference and parser/config adaptation; no runtime dependence on source"
+    },
+    "scripts/protocol.py": {
+      "sha256": "28c8294806c14cc8c47d0aaad975ea8b057e18234cd3785aa5e9b6a50d9a6d8a",
+      "used_for": "native inference and parser/config adaptation; no runtime dependence on source"
+    },
+    "scripts/native_reference.py": {
+      "sha256": "c2bc355c6c9ff5100cd31af7a7b3ebb9119fc073fb5dd95d5e6775d8f61db6e0",
+      "used_for": "native inference and parser/config adaptation; no runtime dependence on source"
+    },
+    "scripts/scoring.py": {
+      "sha256": "d5e02a6525155a6e618257b8e079b5b006c4a394baf23cdce64bf8eb9a180bee",
+      "used_for": "native inference and parser/config adaptation; no runtime dependence on source"
+    },
+    "configs/protocol.json": {
+      "sha256": "21fefd939609f0c0d4df667ccb0581f696e270e4ac645948cbf17ea9f7d67b59",
+      "used_for": "native inference and parser/config adaptation; no runtime dependence on source"
+    },
+    "configs/rendered_native.json": {
+      "sha256": "49007265a6d63a25e456817a3085472a3785921568b5cf5dc08f0a85e646b11f",
+      "used_for": "native inference and parser/config adaptation; no runtime dependence on source"
+    },
+    "configs/scoring_fixtures.json": {
+      "sha256": "de51a055c00f7ef30bb98eb46c2295269a6a10d1b9a2d7f44ed773fbf4fbaee2",
+      "used_for": "native inference and parser/config adaptation; no runtime dependence on source"
+    },
+    "audit/runtime_105211_0.json": {
+      "sha256": "a25909d9ac122764c4db7444d3b35a5f3176e0bdf0c9bdf42da9a89bb5462bc9",
+      "used_for": "native inference and parser/config adaptation; no runtime dependence on source"
+    }
+  },
+  "adaptation": "new independent CLI removes model hook, archival features, study manifests, persistent controller, cluster ownership, absolute cache paths, retries, and evidence-report arm; keeps native audio processing, task/tool ordering, BF16 SDPA Thinker route and resolved generation config",
+  "model_input_leakage_policy": "Only native_task.json native_task/native_tool plus WAV samples enter the conversation. No source filename, transcript, duration label, historical answer or evaluator metadata enters model input. input.wav is a neutral chat-template placeholder. The intended task has no fixed duration."
+}

@@ -1,0 +1,88 @@
+{
+  "gallery_title": "One timer instruction, three listening conditions",
+  "visitor_only_transcript": "Start the timer for nine minutes.",
+  "model": "Qwen/Qwen3-Omni-30B-A3B-Instruct",
+  "model_revision": "26291f793822fb6be9555850f06dfe95f2d7e695",
+  "new_model_calls": 3,
+  "shared_note": "All three listening files use the same attenuation to avoid clipping; this does not equalize loudness.",
+  "conditions": [
+    {
+      "id": "reference",
+      "title": "Original speech",
+      "audio": "prepared/audio/reference.wav",
+      "description": "The spoken instruction without added stress.",
+      "evidence_status": "observed_first_response",
+      "response": "<tool_call>\n{\"name\": \"set_timer\", \"arguments\": {\"hours\": 0, \"minutes\": 9, \"seconds\": 0}}\n</tool_call><|im_end|>",
+      "proposed_action": {
+        "name": "set_timer",
+        "duration_seconds": 540,
+        "arguments": {
+          "hours": 0,
+          "minutes": 9,
+          "seconds": 0
+        },
+        "status": "proposal_only"
+      },
+      "observation": "The model proposed a 540-second timer. No timer was executed.",
+      "generation_status": "completed",
+      "human_review_required": true,
+      "audio_review_status": "pending",
+      "evidence_file": "evidence/gallery/validated/reference.json",
+      "executed_action": null
+    },
+    {
+      "id": "machinery",
+      "title": "Machinery noise",
+      "audio": "prepared/audio/machinery.wav",
+      "description": "A machinery burst overlaps the duration phrase. Noise is calibrated to −10 dB SNR over the marked number.",
+      "evidence_status": "observed_first_response",
+      "response": "<tool_call>\n{\"name\": \"set_timer\", \"arguments\": {\"hours\": 0, \"minutes\": 9, \"seconds\": 0}}\n</tool_call><|im_end|>",
+      "proposed_action": {
+        "name": "set_timer",
+        "duration_seconds": 540,
+        "arguments": {
+          "hours": 0,
+          "minutes": 9,
+          "seconds": 0
+        },
+        "status": "proposal_only"
+      },
+      "observation": "The model proposed a 540-second timer. No timer was executed.",
+      "generation_status": "completed",
+      "human_review_required": true,
+      "audio_review_status": "pending",
+      "evidence_file": "evidence/gallery/validated/machinery.json",
+      "executed_action": null
+    },
+    {
+      "id": "segment_silenced",
+      "title": "Number segment silenced",
+      "audio": "prepared/audio/segment_silenced.wav",
+      "description": "The automatically aligned segment for “nine” is replaced by silence.",
+      "evidence_status": "observed_first_response",
+      "response": "How many minutes would you like to set the timer for?<|im_end|>",
+      "proposed_action": null,
+      "observation": "The model asked for the number of minutes and made no timer proposal.",
+      "generation_status": "completed",
+      "human_review_required": true,
+      "audio_review_status": "pending",
+      "evidence_file": "evidence/gallery/validated/segment_silenced.json",
+      "executed_action": null
+    }
+  ],
+  "historical_evidence": {
+    "evidence_status": "historical_actual",
+    "label": "Archived model response — 9 October 2026",
+    "audio": "source/TRACE_COMPANION_TRANSFER/historical/pilot_recording.wav",
+    "response_file": "source/TRACE_COMPANION_TRANSFER/historical/raw_response.txt",
+    "provenance_file": "evidence/historical.json",
+    "trace_file": "evidence/historical.json",
+    "trace_note": "Labeled public extract. The exact raw response, prompt, settings, tokens, and historical simulation are retained. The complete unchanged source trace is identified by its SHA-256 in the extract and is excluded from public downloads because it contains old host paths.",
+    "note": "This actual archived response belongs to its own gain-scaled audio input, not any of the three new comparison WAVs. The tool call proposes a timer; the archived trace separately records an in-memory simulation."
+  },
+  "human_review_required": true,
+  "audio_review_status": "pending",
+  "generation_attempts": 3,
+  "infrastructure_retries": 0,
+  "gpu_allocation_seconds": 141
+}

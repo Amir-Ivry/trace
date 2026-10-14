@@ -1,0 +1,50 @@
+{
+  "title": "Pneumatic chipping hammer - Holman nc4 - Start 1 short",
+  "creator": "ldezem / Ore.e Refineries",
+  "source_collection": "Sound of Work: Blacksmith edition 1",
+  "recording_location": "Jesse Sipola\u2019s smithy near Turku, Finland (creator description)",
+  "source_page": "https://freesound.org/people/ldezem/sounds/386239/",
+  "collection_page": "https://oree.storijapan.net/praxis/sound-of-work/",
+  "archive_url": "https://oree.storijapan.net/media/sound-of-work/audio/sow-blacksmith-ed1-oneshots.zip",
+  "archive_bytes": 62437653,
+  "archive_member": "sow-blacksmith-ed1-oneshots/pneumatic-tools/chipping-hammer/95_holman-nc4_3-start1_1beat.wav",
+  "creator_metadata_csv": "https://oree.storijapan.net/media/sound-of-work/doc/3_sow-blacksmith-ed1.csv",
+  "license": "CC0 1.0 on Freesound; creator CSV marks PD",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "format": "WAV PCM signed24bit stereo44100Hz",
+  "frames": 33075,
+  "duration_seconds": 0.75,
+  "bytes": 247228,
+  "sha256": "6714b1bc2d4d3ca4e340387c9295ee2ef75296106451d5a1b14999e3236a9abc",
+  "zip_member_crc32_decimal": 654272754,
+  "retrieval": "Original WAV extracted from creator ZIP via HTTP byte ranges; member CRC32 verified. Full archive not downloaded.",
+  "recording_note": "Real recorded Holman nc4 pneumatic chipping hammer start. Creator reports moderate EQ/noise removal mastering and beat-length cropping. Not unprocessed factory ambience; no synthetic sound generation claimed.",
+  "source_metadata_discrepancy": "Freesound display duration0.742s; actual creator ZIP WAV0.750s. Recording capture described96kHz but released selected WAV44.1kHz. Use measured WAV metadata.",
+  "mono_rule": "arithmetic mean of left and right PCM samples; no extra normalization",
+  "mono_peak_abs": 0.977237343788147,
+  "energy_quantile_seconds": {
+    "0.01": 0.013854875283446711,
+    "0.05": 0.03349206349206349,
+    "0.5": 0.13392290249433106,
+    "0.95": 0.26789115646258504,
+    "0.99": 0.3160770975056689
+  },
+  "central90_energy_duration_seconds": 0.23439909297052156,
+  "central98_energy_duration_seconds": 0.3022222222222222,
+  "selection_basis": "Chosen by documented real machinery provenance, transient one-shot description, duration, license and downloadability; no model responses used.",
+  "listening_status": "No human listening performed in this verification. Metadata, WAV decoding and energy envelope checked.",
+  "suggested_mixing": "Retain full0.75second file and natural tail, align energy midpoint to numeral midpoint, scale amplitude only, no time stretch/loop/hardgate to word length; report neighboring-word overlap.",
+  "asset_path": "assets/noise/95_holman-nc4_3-start1_1beat.wav",
+  "packaging_verification": {
+    "sha256_matches_provenance": true,
+    "original_bytes_copied": true
+  },
+  "creator_metadata_row": {
+    "filename": "95_holman-nc4_3-start1_1beat.wav",
+    "title": "Pneumatic chipping hammer - Holman nc4 - Start 1 short",
+    "description": "Holman nc4 pneumatic chipping hammer started once, short. Recorded in 24-bit 96kHz with a Tascam DR-40 and a Sony ECM-NV1. For details on SOW: Blacksmith ed1 sound pack see: www.oree.storijapan.net/praxis/sound-of-work",
+    "license_label": "PD",
+    "collection": "Sound of Work - Blacksmith ed1. - Pneumatic tools - Chipping hammer",
+    "creator": "ldezem"
+  }
+}

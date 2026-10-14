@@ -1,0 +1,79 @@
+{
+  "title": "Voice Agents Under Acoustic Stress: From Signal Degradation to Interaction and Action",
+  "short_name": "TRACE",
+  "status": "Submitted to ICASSP 2027",
+  "citation_year": 2026,
+  "authors": [
+    {
+      "name": "Amir Ivry",
+      "affiliation": "Technion – Israel Institute of Technology"
+    },
+    {
+      "name": "Kai-Wei Chang",
+      "affiliation": "Massachusetts Institute of Technology"
+    },
+    {
+      "name": "Lin Zhang",
+      "affiliation": "Independent Researcher"
+    },
+    {
+      "name": "Sharon Gannot",
+      "affiliation": "Bar-Ilan University"
+    },
+    {
+      "name": "Carlos Busso",
+      "affiliation": "Carnegie Mellon University"
+    }
+  ],
+  "intended_page_url": "https://amir-ivry.github.io/trace/",
+  "github_repository_url": "https://github.com/Amir-Ivry/trace",
+  "paper_file": "reference/paper.pdf",
+  "summary": "TRACE is a practical workflow for testing how acoustic conditions affect a voice agent's actions, task completion, and the effort required from its user.",
+  "design_reference_url": "https://poonehmousavi.github.io/anchorprompt/",
+  "sources": [
+    {
+      "name": "Timers and Such v1.0",
+      "url": "https://zenodo.org/records/4623772",
+      "credit": "Loren Lugosch",
+      "license": "CC0 1.0"
+    },
+    {
+      "name": "Sound of Work: Blacksmith edition 1",
+      "url": "https://oree.storijapan.net/praxis/sound-of-work/",
+      "credit": "Ore.e Refineries; recordings at Jesse Sipola’s smithy",
+      "license": "CC0 1.0"
+    },
+    {
+      "name": "Qwen3-Omni-30B-A3B-Instruct",
+      "url": "https://huggingface.co/Qwen/Qwen3-Omni-30B-A3B-Instruct",
+      "credit": "Qwen team"
+    }
+  ],
+  "trace_steps": [
+    {
+      "letter": "T",
+      "name": "Task",
+      "description": "Define the goal and rules."
+    },
+    {
+      "letter": "R",
+      "name": "Recording",
+      "description": "Select the speech input."
+    },
+    {
+      "letter": "A",
+      "name": "Acoustics",
+      "description": "Alter a copy and check what information remains."
+    },
+    {
+      "letter": "C",
+      "name": "Comparison",
+      "description": "Test the same agent with each input."
+    },
+    {
+      "letter": "E",
+      "name": "Effects",
+      "description": "Compare outcomes and user effort."
+    }
+  ]
+}

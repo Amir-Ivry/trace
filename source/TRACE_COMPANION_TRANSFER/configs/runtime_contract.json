@@ -1,0 +1,16 @@
+{
+  "expected_torch": "2.8.0+cu128",
+  "expected_transformers": "5.19.0",
+  "architecture_sha256": "bae586fb6514556284f3c540c3f3240cb52fa7b40dd358f53ce41518c9a09fe9",
+  "feature_extractor_sha256": "dcce2e7820be059e657a9e12a60e8a55cfd37b1a82ee202ca15fc7d0934374cb",
+  "model_revision": "26291f793822fb6be9555850f06dfe95f2d7e695",
+  "processor_revision": "26291f793822fb6be9555850f06dfe95f2d7e695",
+  "dtype": "bfloat16",
+  "attn_implementation": "sdpa",
+  "model_route": "official Thinker generate; audio output disabled",
+  "input": "mono 16000 Hz finite float32 decoded PCM; no waveform resampling or mixing in inference",
+  "prompt_sha256_canonical_json_string": "9a42200f22a6d23fb76bce8c343bcf94604b91cfe11b4edc6aa650828fcb8010",
+  "generation_sha256_canonical_json": "9ebcafc5c1b98c28bd3e410ed7f16ce76639c9180d7299d3e973bb4f945ccbd2",
+  "seed_note": "CLI requires an explicit seed; no project default or fixed duration is supplied",
+  "new_cli_gpu_validation": "NOT RUN; adapted from historically validated V14 worker"
+}

@@ -1,0 +1,56 @@
+TRACE companion — asset credits, licenses, and code provenance
+
+Paper: Voice Agents Under Acoustic Stress: From Signal Degradation to Interaction
+and Action. Amir Ivry, Kai-Wei Chang, Lin Zhang, Sharon Gannot, Carlos Busso.
+Submitted to ICASSP 2027; manuscript dated 2026. The included PDF is unchanged.
+No separate paper reuse license was supplied; no new license is asserted here.
+
+Speech: Loren Lugosch, Timers and Such v1.0, dev-real/anonymous0_24.wav.
+https://zenodo.org/records/4623772
+Source SHA-256: c303786d4f544d6afa845bceeecadede2f60b717308d5a60afd51650f272d3df
+CC0 1.0 Universal. Full text: source/TRACE_COMPANION_TRANSFER/assets/speech/CC0_1.0.txt
+(in the webpage preview: licenses/speech_CC0_1.0.txt).
+
+Machinery: ldezem / Ore.e Refineries, Sound of Work: Blacksmith edition 1.
+Pneumatic chipping hammer — Holman nc4 — Start 1 short.
+Recorded at Jesse Sipola's smithy near Turku, Finland.
+https://oree.storijapan.net/praxis/sound-of-work/
+https://freesound.org/people/ldezem/sounds/386239/
+Source SHA-256: 6714b1bc2d4d3ca4e340387c9295ee2ef75296106451d5a1b14999e3236a9abc
+CC0 1.0 on Freesound; creator metadata marks PD. The selected released recording
+has creator-applied mastering and beat-length editing; it is not raw ambience.
+Full text: source/TRACE_COMPANION_TRANSFER/assets/noise/CC0_1.0.txt
+(in the webpage preview: licenses/noise_CC0_1.0.txt).
+
+Companion audio derivatives use one shared gain and PCM16 quantization. The
+machinery derivative mixes the full released event. The silenced derivative
+zeros a historically aligned interval. The untouched source assets remain included.
+
+Historical model: Qwen team, Qwen/Qwen3-Omni-30B-A3B-Instruct.
+https://huggingface.co/Qwen/Qwen3-Omni-30B-A3B-Instruct
+Revision: 26291f793822fb6be9555850f06dfe95f2d7e695
+One archived response from 9 October 2026 remains separate from the new gallery
+observations. New saved first responses, where completed, are described in
+RESULTS_GALLERY.md. No weights, installed environments, credentials, or live timer
+services are bundled. Optional inference source/configuration is included.
+
+Code provenance: the transferred audio_recipe.py was extracted/re-expressed from
+the historical v3 prepare.py additive operation. The companion native_parser.py
+derives from the transferred parser, with the documented malformed-tail fix in
+companion/PARSER_CHANGE.md. Source hashes and adaptation provenance are provided
+in source/TRACE_COMPANION_TRANSFER/configs/code_provenance.json. The conversation
+scorer, saved-response validator, site, build/export tools, and new tests were
+added for this companion. CPU tools remain separate from optional GPU code.
+Audio CC0 licenses do not license the code.
+No explicit code license was supplied for the transfer or companion; none is
+invented for this download. Redistribution/reuse licensing remains with the
+rights holders. No blanket license is asserted for the paper or entire archive.
+
+The public code archive is an allowlisted subset of the transfer. It deliberately
+omits private handoff instructions, old environment/runtime receipts, original
+historical full traces containing host paths, private scheduler receipts, caches,
+and weights. The optional unchanged inference entry point and its required
+configurations are included with GPU_REPRODUCTION.md; CPU dependencies remain separate.
+evidence/historical.json is a labeled public extract retaining exact response,
+prompt, tokens, settings, and recorded simulation, plus the complete source-trace
+hash. The immutable original trace remains in the local research project.

@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A TRACE paper companion: listen to three timer inputs, inspect archived evidence, and reproduce scripted conversation scoring on CPU.">
+  <title>TRACE · Voice Agents Under Acoustic Stress</title>
+  <link rel="canonical" href="https://amir-ivry.github.io/trace/">
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="assets/app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar"><a class="brand" href="#main">TRACE<small>Paper companion</small></a><nav aria-label="Page navigation"><a href="#audio">Listen</a><a href="#scoring">Scoring</a><a href="#run">Reproduce</a></nav></header>
+<main id="main">
+  <header class="hero">
+    <p class="eyebrow">Submitted to ICASSP 2027 · 2026</p>
+    <h1>Voice Agents Under Acoustic Stress: From Signal Degradation to Interaction and Action</h1>
+    <p class="authors"><span>Amir Ivry<sup>1</sup></span> <span>Kai-Wei Chang<sup>2</sup></span> <span>Lin Zhang<sup>3</sup></span> <span>Sharon Gannot<sup>4</sup></span> <span>Carlos Busso<sup>5</sup></span></p>
+    <p class="affiliations"><span><sup>1</sup> Technion – Israel Institute of Technology</span> <span><sup>2</sup> Massachusetts Institute of Technology</span> <span><sup>3</sup> Independent Researcher</span> <span><sup>4</sup> Bar-Ilan University</span> <span><sup>5</sup> Carnegie Mellon University</span></p>
+    <p class="summary">TRACE is a practical workflow for testing how acoustic conditions affect a voice agent&#x27;s actions, task completion, and the effort required from its user.</p>
+    <div class="actions"><a class="button primary" href="paper.pdf">Read the paper <span aria-hidden="true">&nbsp;↗</span></a><a class="button" href="https://github.com/Amir-Ivry/trace">GitHub <span aria-hidden="true">&nbsp;↗</span></a><a class="button" href="#audio">Audio examples <span aria-hidden="true">&nbsp;↓</span></a><a class="button" href="downloads/TRACE_COMPANION_CODE.zip" download>Download code and examples</a></div>
+  </header>
+
+  <section id="workflow" aria-labelledby="workflow-title">
+    <span class="section-number">01 / THE WORKFLOW</span>
+    <h2 id="workflow-title">What TRACE does</h2>
+    <p class="lead">Follow a spoken request from the recording to the action it produces. Define what a successful task requires, compare inputs, then follow the conversation through mistakes, recovery, and user effort.</p>
+    <ol class="workflow"><li><span class="letter" aria-hidden="true">T</span><h3>Task</h3><p>Define the goal and rules.</p></li><li><span class="letter" aria-hidden="true">R</span><h3>Recording</h3><p>Select the speech input.</p></li><li><span class="letter" aria-hidden="true">A</span><h3>Acoustics</h3><p>Alter a copy and check what information remains.</p></li><li><span class="letter" aria-hidden="true">C</span><h3>Comparison</h3><p>Test the same agent with each input.</p></li><li><span class="letter" aria-hidden="true">E</span><h3>Effects</h3><p>Compare outcomes and user effort.</p></li></ol>
+  </section>
+
+  <section id="audio" aria-labelledby="audio-title">
+    <span class="section-number">02 / LISTEN TO THE INPUTS</span>
+    <h2 id="audio-title">One timer instruction, three listening conditions</h2>
+    <p class="lead">This timer example shows how TRACE connects a change in speech to the agent’s next action. The three clips contain the same instruction, with added noise or a silenced segment in two copies. The question is whether enough information remains to set the correct timer, or whether the agent needs to ask for the duration.</p>
+    <blockquote class="utterance">“Start the timer for nine minutes.”</blockquote>
+    <div class="gallery"><article class="audio-card" data-evidence-status="observed_first_response" data-condition="reference">
+          <span class="condition">Condition 01</span><h3>Original speech</h3>
+          <p class="description">The spoken instruction without added stress.</p>
+          <audio controls preload="metadata" aria-label="Original speech"><source src="audio/reference.wav" type="audio/wav"><a href="audio/reference.wav">Download WAV</a></audio>
+          <dl class="response-fields"><dt>Actual first response</dt>
+      <dd class="response-text">The model returned a timer proposal.</dd><dt>Proposed action</dt><dd>Set a timer for 9 minutes (proposal only).</dd></dl>
+      <details class="technical response-detail"><summary>Exact response and provenance</summary>
+      <pre class="raw-response"><code>&lt;tool_call&gt;
+{&quot;name&quot;: &quot;set_timer&quot;, &quot;arguments&quot;: {&quot;hours&quot;: 0, &quot;minutes&quot;: 9, &quot;seconds&quot;: 0}}
+&lt;/tool_call&gt;&lt;|im_end|&gt;</code></pre>
+      <p>Saved first response; no follow-up conversation was run.</p><p>Seed 1234 · 2026-10-13T21:34:00.273301+00:00<br>No timer was executed.</p>
+      <p><a href="data/gallery/reference_raw_response.txt" download>Raw response text</a> ·
+      <a href="data/gallery/reference_loader.json" download>Complete saved observation</a> ·
+      <a href="data/gallery/reference_validated.json" download>Validation record</a></p></details>
+          <p class="observation">The model proposed a 540-second timer. No timer was executed.</p></article>
+<article class="audio-card" data-evidence-status="observed_first_response" data-condition="machinery">
+          <span class="condition">Condition 02</span><h3>Machinery noise</h3>
+          <p class="description">A machinery burst overlaps the duration phrase. Noise is calibrated to −10 dB SNR over the marked number.</p>
+          <audio controls preload="metadata" aria-label="Machinery noise"><source src="audio/machinery.wav" type="audio/wav"><a href="audio/machinery.wav">Download WAV</a></audio>
+          <dl class="response-fields"><dt>Actual first response</dt>
+      <dd class="response-text">The model returned a timer proposal.</dd><dt>Proposed action</dt><dd>Set a timer for 9 minutes (proposal only).</dd></dl>
+      <details class="technical response-detail"><summary>Exact response and provenance</summary>
+      <pre class="raw-response"><code>&lt;tool_call&gt;
+{&quot;name&quot;: &quot;set_timer&quot;, &quot;arguments&quot;: {&quot;hours&quot;: 0, &quot;minutes&quot;: 9, &quot;seconds&quot;: 0}}
+&lt;/tool_call&gt;&lt;|im_end|&gt;</code></pre>
+      <p>Saved first response; no follow-up conversation was run.</p><p>Seed 1234 · 2026-10-13T21:34:26.303050+00:00<br>No timer was executed.</p>
+      <p><a href="data/gallery/machinery_raw_response.txt" download>Raw response text</a> ·
+      <a href="data/gallery/machinery_loader.json" download>Complete saved observation</a> ·
+      <a href="data/gallery/machinery_validated.json" download>Validation record</a></p></details>
+          <p class="observation">The model proposed a 540-second timer. No timer was executed.</p></article>
+<article class="audio-card" data-evidence-status="observed_first_response" data-condition="segment_silenced">
+          <span class="condition">Condition 03</span><h3>Number segment silenced</h3>
+          <p class="description">The automatically aligned segment for “nine” is replaced by silence.</p>
+          <audio controls preload="metadata" aria-label="Number segment silenced"><source src="audio/segment_silenced.wav" type="audio/wav"><a href="audio/segment_silenced.wav">Download WAV</a></audio>
+          <dl class="response-fields"><dt>Actual first response</dt>
+      <dd class="response-text">How many minutes would you like to set the timer for?</dd><dt>Proposed action</dt><dd>No timer proposal parsed.</dd></dl>
+      <details class="technical response-detail"><summary>Exact response and provenance</summary>
+      <pre class="raw-response"><code>How many minutes would you like to set the timer for?&lt;|im_end|&gt;</code></pre>
+      <p>Saved first response; no follow-up conversation was run.</p><p>Seed 1234 · 2026-10-13T21:34:50.984635+00:00<br>No timer was executed.</p>
+      <p><a href="data/gallery/segment_silenced_raw_response.txt" download>Raw response text</a> ·
+      <a href="data/gallery/segment_silenced_loader.json" download>Complete saved observation</a> ·
+      <a href="data/gallery/segment_silenced_validated.json" download>Validation record</a></p></details>
+          <p class="observation">The model asked for the number of minutes and made no timer proposal.</p></article></div>
+    <p class="shared-note">All three clips use the same attenuation to avoid clipping. Exact preparation details and the untouched source recording are available below.</p>
+    <div class="callout"><strong>3 actual first responses.</strong> Each response belongs to the exact WAV above. Human interpretation and audio-cue review remain pending. These first responses do not establish completed tasks or an agent success rate.</div>
+    <details class="technical"><summary>Audio preparation, exact files, and pending input review</summary>
+      <dl><dt>Recording</dt><dd>Timers and Such v1.0, <code>dev-real/anonymous0_24.wav</code>. Mono, 16 kHz, 28,989 samples (1.8118125 seconds) in every comparison file.</dd>
+      <dt>Shared attenuation</dt><dd>All three files use gain 0.908076 (about −0.84 dB), followed by the same PCM16 export. This preserves relative levels without clipping; it does not equalize the clips’ loudness. “Original speech” is a comparison copy of the <a href="audio/untouched_source.wav" download>untouched source recording</a>. These exact PCM16 files are the model inputs specified for this gallery.</dd>
+      <dt>Marked number</dt><dd>Samples [15461, 18682), or 0.9663125–1.167625 seconds. Start inclusive; end exclusive. These are historical automatic forced-alignment estimates, not human phonetic annotations. The silenced condition sets this interval to zero and retains the duration.</dd>
+      <dt>Machinery event</dt><dd>The complete released 0.75-second Holman nc4 event spans samples [14934, 26934), or 0.933375–1.683375 seconds. It overlaps the duration phrase, including part of “minutes.” The creator’s released recording includes mastering and beat-length editing.</dd>
+      <dt>Local SNR</dt><dd>−10 dB, calibrated from speech and added-noise energy only within the marked number interval, before their shared attenuation. After PCM16 export: −9.9999966 dB. This is neither whole-recording SNR nor physical sound pressure. No SNR applies to the silenced condition.</dd>
+      <dt>Input review</dt><dd>Human listening and a residual-cue audit remain pending. No model response determined the segment boundaries or machinery selection. The visible transcript is for visitors; it is not model input.</dd>
+      <dt>Frozen requests</dt><dd>Qwen3-Omni-30B-A3B-Instruct; model and processor revision <code>26291f793822fb6be9555850f06dfe95f2d7e695</code>. Each request uses a fresh conversation and seed 1234, Thinker audio input with text output, BF16, SDPA, and batch size one. Sampling: temperature 0.6, top-p 0.95, top-k 20, maximum 256 new tokens. The model receives only the audio waveform and generic timer <a href="data/native_prompt.txt">prompt/tool schema</a>, with the neutral <code>input.wav</code> placeholder. See the complete <a href="data/generation_config.json">generation settings</a> and <a href="data/gallery/run_manifest.json">frozen request manifest</a>. No model is loaded by this page.</dd></dl>
+      <p>Exact SHA-256 values for the PCM16 files:</p><ul><li>Original speech: <code>f12141a1dfefa3d3a90066b85d5f0dcb4bc60e07f1238efaa7c5fbe9017dbcad</code></li>
+<li>Machinery noise: <code>e11df5ec40467079404ec9dd583803371ef69be2559f2de84a1a50d81625509f</code></li>
+<li>Number segment silenced: <code>05785e5e0d8401fdbda697dfd9838251b4369a0d1c4e1774b38f9235a3443bf5</code></li></ul>
+      <p><a href="data/audio_manifest.json">Original preparation manifest (before inference)</a> · <a href="data/gallery.json">Saved gallery evidence states</a></p>
+    </details>
+  </section>
+
+  <details id="archive" class="technical">
+    <summary>Optional: one archived model response from 9 October 2026</summary>
+    <p class="lead">An actual response recorded on 9 October 2026, kept separate from the three current responses. It belongs to its own gain-scaled recording and is not used as evidence for any of the three new inputs.</p>
+    <div class="archive">
+      <div class="archive-player"><span class="badge">Historical actual response</span><h3>Exact archived input</h3><p>Original speech with gain 0.9708313164; no added noise. This player uses the original float WAV, with no conversion.</p><audio controls preload="metadata" aria-label="Exact archived gain-scaled input"><source src="audio/pilot_recording.wav" type="audio/wav">Your browser does not support this WAV. <a href="audio/pilot_recording.wav">Download the exact archived input</a>.</audio><p class="small"><a href="audio/pilot_recording.wav" download>Download original float WAV</a></p></div>
+      <div><h3>Complete generated response</h3><pre><code>&lt;tool_call&gt;
+{&quot;name&quot;: &quot;set_timer&quot;, &quot;arguments&quot;: {&quot;hours&quot;: 0, &quot;minutes&quot;: 9, &quot;seconds&quot;: 0}}
+&lt;/tool_call&gt;&lt;|im_end|&gt;</code></pre><p><strong>Proposed action:</strong> <code>set_timer(hours=0, minutes=9, seconds=0)</code>. Generated syntax alone is a proposal.</p><p><strong>Recorded simulation:</strong> the archived trace separately reports a 540-second timer in memory. No real timer was started.</p></div>
+    </div>
+    <details class="technical"><summary>Archived model, settings, and evidence provenance</summary><dl><dt>Model</dt><dd>Qwen/Qwen3-Omni-30B-A3B-Instruct<br>Revision <code>26291f793822fb6be9555850f06dfe95f2d7e695</code></dd><dt>Timestamp / seed</dt><dd>9 October 2026, 16:41:05 UTC · Seed 655677136 · 32 generated tokens.</dd><dt>Sampling</dt><dd>Sampling enabled; temperature 0.6, top-p 0.95, top-k 20, maximum 256 new tokens. The <a href="data/historical_generation_config.json">complete saved settings</a> and <a href="data/historical_prompt.txt">exact rendered prompt</a> are available.</dd><dt>Input SHA-256</dt><dd class="hash"><code>722b0356acb98ce36c91e2d73b4e45873d7a1864ad1904406a0df9634f4637e6</code></dd></dl><p><a href="data/historical_raw_response.txt">Exact raw response</a> · <a href="data/historical.json">Public evidence extract with recorded simulation</a>. This extract retains response, prompt, tokens, settings, and simulation, while excluding old host paths and runtime receipts. Its source-trace hash identifies the unchanged archival record.</p></details>
+  </details>
+
+  <section id="scoring" aria-labelledby="scoring-title">
+    <span class="section-number">03 / FOLLOW THE CONVERSATION</span>
+    <h2 id="scoring-title">How TRACE scores a conversation</h2>
+    <p class="lead">A first response does not show whether the task eventually succeeds. The scripted examples below illustrate how TRACE follows the conversation and records mistakes and extra user effort.</p>
+    <p class="score-label">Scripted scoring examples — not measured model performance</p>
+    <table class="scores"><caption>Goal: exactly one active 540-second timer at the end, within 30 seconds and at most five extra user turns.</caption><thead><tr><th scope="col">Scripted scenario</th><th scope="col">Goal attained</th><th scope="col">Violation</th><th scope="col">Recovery<br>completed / initiated</th><th scope="col">Task success</th><th scope="col">Extra user turns</th></tr></thead><tbody><tr data-scenario="S1"><td><span class="scenario"><small>S1</small>Correct timer without clarification</span><span class="assumption">The initial instruction provides the duration.</span></td><td data-label="Goal attained" class="yes">Yes</td><td data-label="Violation" class="no">No</td><td data-label="Recovery completed / initiated" class="">0 / 0</td><td data-label="Task success" class="yes">Yes</td><td data-label="Extra user turns" class="">0</td></tr>
+<tr data-scenario="S2"><td><span class="scenario"><small>S2</small>Clarification followed by the correct timer</span><span class="assumption">The initial duration is unavailable; a reply supplies it.</span></td><td data-label="Goal attained" class="yes">Yes</td><td data-label="Violation" class="no">No</td><td data-label="Recovery completed / initiated" class="">1 / 1</td><td data-label="Task success" class="yes">Yes</td><td data-label="Extra user turns" class="">1</td></tr>
+<tr data-scenario="S3"><td><span class="scenario"><small>S3</small>Wrong timer cancelled and replaced after correction</span><span class="assumption">The duration is available, but a wrong timer is created first.</span></td><td data-label="Goal attained" class="yes">Yes</td><td data-label="Violation" class="warning">Yes</td><td data-label="Recovery completed / initiated" class="">1 / 1</td><td data-label="Task success" class="no">No</td><td data-label="Extra user turns" class="">1</td></tr>
+<tr data-scenario="S4"><td><span class="scenario"><small>S4</small>Clarification requested; user declines to continue</span><span class="assumption">The duration is missing; the refusal supplies no duration.</span></td><td data-label="Goal attained" class="no">No</td><td data-label="Violation" class="no">No</td><td data-label="Recovery completed / initiated" class="">0 / 1</td><td data-label="Task success" class="no">No</td><td data-label="Extra user turns" class="">1</td></tr>
+<tr data-scenario="S5"><td><span class="scenario"><small>S5</small>Correct duration guessed before it is obtained</span><span class="assumption">The scenario stipulates that no available input reveals the duration.</span></td><td data-label="Goal attained" class="yes">Yes</td><td data-label="Violation" class="warning">Yes</td><td data-label="Recovery completed / initiated" class="">0 / 0</td><td data-label="Task success" class="no">No</td><td data-label="Extra user turns" class="">0</td></tr></tbody></table>
+    <div class="score-notes"><p><strong>A correct final timer is only part of success.</strong> Creating a wrong-duration timer, or creating a timer before required information is obtained, remains a violation even if it is later cancelled. Task success requires the goal and no violations.</p><p><strong>Recovery takes more than asking.</strong> A request for missing information or user correction begins an attempt. Obtaining the information and using it to resume the task completes recovery. Every user reply, correction, or refusal after the initial instruction adds one user turn.</p></div>
+    <p class="small">The fictional missing-duration cases explicitly stipulate that the number is unavailable until the user supplies it. That assumption does not establish what can be heard in the new silenced WAV. A proposal alone never changes simulated state. These five rows are teaching examples; they do not support an agent success rate or a combined TRACE score.</p>
+    <details class="technical"><summary>Inspect the scripted conversations and computed state</summary><h3>S1 · Correct timer without clarification</h3><pre><code>[
+  {
+    &quot;t&quot;: 0,
+    &quot;type&quot;: &quot;user_instruction&quot;,
+    &quot;duration_available&quot;: true
+  },
+  {
+    &quot;t&quot;: 1,
+    &quot;type&quot;: &quot;timer_created&quot;,
+    &quot;timer_id&quot;: &quot;timer_1&quot;,
+    &quot;duration_seconds&quot;: 540,
+    &quot;execution&quot;: &quot;scripted_inert_simulation&quot;
+  }
+]</code></pre>
+<h3>S2 · Clarification followed by the correct timer</h3><pre><code>[
+  {
+    &quot;t&quot;: 0,
+    &quot;type&quot;: &quot;user_instruction&quot;,
+    &quot;duration_available&quot;: false
+  },
+  {
+    &quot;t&quot;: 1,
+    &quot;type&quot;: &quot;agent_clarification&quot;,
+    &quot;text&quot;: &quot;How many minutes?&quot;
+  },
+  {
+    &quot;t&quot;: 2,
+    &quot;type&quot;: &quot;user_reply&quot;,
+    &quot;duration_seconds&quot;: 540
+  },
+  {
+    &quot;t&quot;: 3,
+    &quot;type&quot;: &quot;timer_created&quot;,
+    &quot;timer_id&quot;: &quot;timer_1&quot;,
+    &quot;duration_seconds&quot;: 540,
+    &quot;execution&quot;: &quot;scripted_inert_simulation&quot;
+  }
+]</code></pre>
+<h3>S3 · Wrong timer cancelled and replaced after correction</h3><pre><code>[
+  {
+    &quot;t&quot;: 0,
+    &quot;type&quot;: &quot;user_instruction&quot;,
+    &quot;duration_available&quot;: true
+  },
+  {
+    &quot;t&quot;: 1,
+    &quot;type&quot;: &quot;timer_created&quot;,
+    &quot;timer_id&quot;: &quot;timer_wrong&quot;,
+    &quot;duration_seconds&quot;: 360,
+    &quot;execution&quot;: &quot;scripted_inert_simulation&quot;
+  },
+  {
+    &quot;t&quot;: 2,
+    &quot;type&quot;: &quot;user_correction&quot;,
+    &quot;duration_seconds&quot;: 540
+  },
+  {
+    &quot;t&quot;: 3,
+    &quot;type&quot;: &quot;timer_cancelled&quot;,
+    &quot;timer_id&quot;: &quot;timer_wrong&quot;
+  },
+  {
+    &quot;t&quot;: 4,
+    &quot;type&quot;: &quot;timer_created&quot;,
+    &quot;timer_id&quot;: &quot;timer_correct&quot;,
+    &quot;duration_seconds&quot;: 540,
+    &quot;execution&quot;: &quot;scripted_inert_simulation&quot;
+  }
+]</code></pre>
+<h3>S4 · Clarification requested; user declines to continue</h3><pre><code>[
+  {
+    &quot;t&quot;: 0,
+    &quot;type&quot;: &quot;user_instruction&quot;,
+    &quot;duration_available&quot;: false
+  },
+  {
+    &quot;t&quot;: 1,
+    &quot;type&quot;: &quot;agent_clarification&quot;,
+    &quot;text&quot;: &quot;How many minutes?&quot;
+  },
+  {
+    &quot;t&quot;: 2,
+    &quot;type&quot;: &quot;user_refusal&quot;,
+    &quot;text&quot;: &quot;Never mind.&quot;
+  }
+]</code></pre>
+<h3>S5 · Correct duration guessed before it is obtained</h3><pre><code>[
+  {
+    &quot;t&quot;: 0,
+    &quot;type&quot;: &quot;user_instruction&quot;,
+    &quot;duration_available&quot;: false
+  },
+  {
+    &quot;t&quot;: 1,
+    &quot;type&quot;: &quot;timer_created&quot;,
+    &quot;timer_id&quot;: &quot;timer_1&quot;,
+    &quot;duration_seconds&quot;: 540,
+    &quot;execution&quot;: &quot;scripted_inert_simulation&quot;
+  }
+]</code></pre><p><a href="data/scoring_examples.json">Event fixtures and hand-calculated expectations</a> · <a href="data/scripted_scores.json">Computed scores, violations, and final states</a></p><p>Exceeding a time or turn limit prevents goal attainment and task success. Budget failures are reported separately from prohibited actions. Invalid event sequences are rejected explicitly. Only inert timers in local memory are used.</p></details>
+  </section>
+
+  <section id="run" aria-labelledby="run-title">
+    <span class="section-number">04 / REPRODUCE AND ADAPT</span>
+    <h2 id="run-title">Run the example on CPU</h2>
+    <p class="lead">Download and extract the example package. Use Python 3.10 or newer with NumPy and SciPy; installation instructions are included in the README. The CPU tools need no model credentials or GPU.</p>
+    <div class="run-grid"><div><h3>Two commands, from the extracted folder</h3><pre><code>python -B scripts/prepare_audio.py --output outputs/reproduced_audio
+python -B -m companion.scoring --output outputs/scripted_scores.json</code></pre><p class="small">Preparation reproduces the shipped PCM16 inputs. Scoring computes all five rows from the event logs.</p><a class="button primary" href="downloads/TRACE_COMPANION_CODE.zip" download>Download code and examples</a></div><div><h3>Adapt it to your task</h3><ol><li>Replace the recording and mark the segment to change. Review what information remains after editing.</li><li>For a different task, replace the timer-specific rules and state updates in <code>companion/scoring.py</code>. Changing the example JSON alone does not define a new scorer.</li><li>Represent the conversation as event logs, keeping proposed actions separate from actions that were executed. The supplied scorer accepts scripted examples; using real logs requires an adapter and validation.</li></ol></div></div>
+    <details class="technical"><summary>Saved responses and optional GPU reproduction</summary><p>3 of 3 first-response records are available. Saved records are checked against the exact audio hash, model and processor revisions, generic prompt, resolved settings, seed 1234, and pinned runtime. Human-review flags remain pending. No parsed timer proposal is executed, and first responses are not passed through the conversation scorer.</p><p>The download includes a separate optional GPU entry point and pinned runtime instructions. The two CPU commands above do not install or load model dependencies. GPU reproduction needs the specified 96 GB RTX PRO 6000 and a separately obtained pinned model snapshot.</p></details>
+  </section>
+
+  <section id="credits" aria-labelledby="credits-title">
+    <span class="section-number">05 / CITATION AND CREDITS</span>
+    <h2 id="credits-title">Reference the paper</h2>
+    <div class="citation-head"><h3>BibTeX · submitted manuscript</h3><button type="button" class="button copy-button" id="copy-citation">Copy citation</button></div>
+    <pre><code id="bibtex">@unpublished{ivry2026trace,
+  title = {Voice Agents Under Acoustic Stress: From Signal Degradation to Interaction and Action},
+  author = {Ivry, Amir and Chang, Kai-Wei and Zhang, Lin and Gannot, Sharon and Busso, Carlos},
+  year = {2026},
+  note = {Submitted to ICASSP 2027}
+}</code></pre><p id="copy-status" class="copy-status" role="status" aria-live="polite"></p>
+    <div class="credits"><p><strong>Speech:</strong> Loren Lugosch, <a href="https://zenodo.org/records/4623772">Timers and Such v1.0</a>, <code>dev-real/anonymous0_24.wav</code>, CC0 1.0. <a href="licenses/speech_CC0_1.0.txt">License text</a>.</p><p><strong>Machinery:</strong> ldezem / Ore.e Refineries, <a href="https://oree.storijapan.net/praxis/sound-of-work/">Sound of Work: Blacksmith edition 1</a>, Holman nc4 start event, recorded at Jesse Sipola’s smithy. Released under CC0 1.0; the creator’s metadata marks it public domain. <a href="licenses/noise_CC0_1.0.txt">License text</a>.</p><p><strong>Archived model:</strong> Qwen team, <a href="https://huggingface.co/Qwen/Qwen3-Omni-30B-A3B-Instruct">Qwen3-Omni-30B-A3B-Instruct model card</a>. No weights or inference runtime are included.</p><p>Audio licenses apply to the audio assets. The downloaded <a href="data/CREDITS_AND_LICENSES.txt">provenance and licensing note</a> identifies transferred code separately; no blanket code or paper license is asserted. The PDF is the unchanged submitted manuscript.</p></div>
+  </section>
+</main>
+<footer><span>TRACE · A practical workflow for voice-agent evaluation</span><span>Paper companion · 3 actual first responses</span></footer>
+</body>
+</html>
